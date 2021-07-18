@@ -1,0 +1,6 @@
+framework module Pods_Rx_Memo {
+  umbrella header "Pods-Rx_Memo-umbrella.h"
+
+  export *
+  module * { export * }
+}

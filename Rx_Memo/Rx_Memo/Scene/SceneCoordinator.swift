@@ -42,7 +42,7 @@ class SceneCoordinator: SceneCoordinatorType {
             }
             currentVC = target
         }
-        return subject.ignoreElements()
+        return subject.ignoreElements().asCompletable()
     }
     
     func close(animated: Bool) -> Completable {
@@ -55,14 +55,14 @@ class SceneCoordinator: SceneCoordinatorType {
             }else if let nav = self.currentVC.navigationController {
                 guard nav.popViewController(animated: animated) != nil else {
                     completable(.error(TransitionError.cannotPop))
-                    return Disposable.create()
+                    return Disposables.create()
                 }
                 self.currentVC = nav.viewControllers.last!
                 completable(.completed)
             }else {
                 completable(.error(TransitionError.unknown))
             }
-            return Disposable.create()
+            return Disposables.create()
         }
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-class MemoStorage: MemoStorageType {
+class MemoryStorage: MemoStorageType {
     private var list = [
         Memo(content: "Hello, RxSwift", insertDate: Date().addingTimeInterval(-10)),
         Memo(content: "Lorem Ipsum", insertDate: Date().addingTimeInterval(-20))

@@ -71,3 +71,45 @@
 	let o3 = subject.subscribe { print(">> 3", $0) }
 	o3.disposed(by: disposeBag)
 	```
+	
+> Observable을 생성하는 연산자(just, of, from)
+
+- just: 하나의 항목을 방출하는 Observable을 생성
+
+	```swift
+		let disposeBag = DisposeBag()
+		let element = "a"
+		Observable.just()
+			.subscribe { event in print(event) }
+			.disposed(by: disposeBag)
+			
+		Observable.just([1, 2, 3])
+			.subscribe { event in print(event) }
+			.disposed(by: disposeBag)
+	```
+
+- of: 두개이상의 항목을 방출하는 Observable을 생성
+
+	```swift
+		let disposeBag = DisposeBag()
+		let apple = "a"
+		let orange = "o"
+		let kiwi = "k"
+		Observable.of(apple, orange, kiwi)
+			.subscribe { event in print(event) }
+			.disposed(by: disposeBag)
+			
+		Observable.of([1, 2], [3, 4], [5, 6])
+			.subscribe { event in print(event) }
+			.disposed(by: disposeBag)
+	```
+	
+- from: 배열에 포함된 요소를 하나씩 순서대로 방출하는 Observable을 생성
+
+	```swift
+		let disposeBag = DisposeBag()
+		let fruits = ["a", "b", "c", "d", "e"]
+		Observable.just(fruits)
+			.subscribe { event in print(event) }
+			.disposed(by: disposeBag)
+	```

@@ -113,3 +113,16 @@
 			.subscribe { event in print(event) }
 			.disposed(by: disposeBag)
 	```
+	
+> filter 연산자
+
+- Observable이 방출하는 요소를 필터링 함
+
+	```swift
+		let disposeBag = DisposeBag()
+		let numbers = [1, 2, 3, 4, 5, 6, 7]
+		Observable.from(numbers)
+			.filter { $0.isMultiple(of: 2) }
+			.subscribe { event in print(event) }
+			.disposed(by: disposeBag)
+	```

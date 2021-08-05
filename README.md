@@ -126,3 +126,27 @@
 			.subscribe { event in print(event) }
 			.disposed(by: disposeBag)
 	```
+	
+> flatMap 연산자
+
+- 원본 Observable이 항목을 방출하면 flatMap 연산자가 변환함수를 실행함
+- 변환함수는 방출된 항목을 Observable로 변환
+- 방출된 항목의 값이 바뀌면 flatMap 연산자가 변환한 Observable이 새로운 항목을 방출
+- 이런 특징때문에 원본 Observable이 방출하는 항목을 지속적으로 감시하고 최신값을 확인할 수 있음
+- flatMap은 모든 Observable이 방출하는 항목을 모아서 최종적으로 하나의 Observable을 리턴함
+
+	```swift
+		let disposeBag = DisposeBag()
+		let a = BehaviorSubject(value: 1)
+		let b = BehaviorSubject(value: 2)
+		let subject = PublishSubject<BehaviorSubject<Int>>()
+		
+		subject
+			.flatMap { $0.asObservable() }
+			.subscribe { print($0) }
+			.disposed(by: disposeBag)
+		subject.onNext(a)
+		subject.onNext(b)
+		
+		a.onNext(11)
+	```

@@ -150,3 +150,21 @@
 		
 		a.onNext(11)
 	```
+	
+> CombineLatest Operator
+
+- 연산자가 return 한 Observable이 언제 이벤트를 방출하는지 이해하는 것이 핵심
+- 여러 Observable 중에서 하나라도 바뀌게 되면 combine 된 그 값이 구독자에게 전달됨	
+	```swift
+		let disposeBag = DisposeBag()
+		let greetings = PublishSubject<String>()
+		let languages = PublishSubject<String>()
+		
+		Observable.combineLatest(greetings, languages) { lhs, rhs -> String in
+			return "\(lhs) \(rhs)"
+		}
+		.subscribe { print($0) }
+		.disposed(by: bag)
+		
+		greetings.onNext("Hi")
+	```

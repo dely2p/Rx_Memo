@@ -168,3 +168,17 @@
 		
 		greetings.onNext("Hi")
 	```
+	
+> Binding
+
+- Binding: 데이터를 UI에 표시함
+- Cocoa Touch로 구현된 UI를 RxCocoa로 구현
+- Binder는 main thread에서 실행됨
+
+	```swift
+	valueField.rx.text
+		.subscribe(onNext: { [weak self] str in 
+			self?.valueLabel.text = str
+		})
+		.disposed(by: disposeBag
+	```
